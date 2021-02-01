@@ -1,14 +1,14 @@
-import React, { Component } from "react";
+import React, {useState} from "react";
 import { Container } from "react-bootstrap";
 
-class Login extends Component {
-  render() {
-    return (
+const Login = () => {
+  return (
+    <div>
       <Container>
         <div className="row mt-5">
           <div className="col-md-6 m-auto">
             <div className="card card-body">
-              <h1 style={{color: "#454545af"}} className="text-center mb-3">
+              <h1 style={{ color: "#454545af" }} className="text-center mb-3">
                 <i className="fas fa-sign-in-alt"></i> Login
               </h1>
               <form>
@@ -33,7 +33,7 @@ class Login extends Component {
                   />
                 </div>
                 <button
-                  style={{backgroundColor: "#74c69d", border: "none"}}
+                  style={{ backgroundColor: "#74c69d", border: "none" }}
                   id="login"
                   type="submit"
                   className="btn btn-primary btn-block"
@@ -42,14 +42,17 @@ class Login extends Component {
                 </button>
               </form>
               <p className="lead mt-4">
-                No Account? <a href="/register" style={{color: "#74c69d"}}>Register</a>
+                No Account?{" "}
+                <a href="/register" style={{ color: "#74c69d" }}>
+                  Register
+                </a>
               </p>
             </div>
           </div>
         </div>
       </Container>
-    );
-  }
-}
+    </div>
+  );
+};
 
 export default Login;

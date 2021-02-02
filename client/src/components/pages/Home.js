@@ -14,7 +14,13 @@ const Home = () => {
           <Button href="/register" id="home-register" size="lg" block>
             Register
           </Button>
-          <Button href="/login" id="home-login" variant="secondary" size="lg" block>
+          <Button
+            href="/login"
+            id="home-login"
+            variant="secondary"
+            size="lg"
+            block
+          >
             Login
           </Button>
         </div>

@@ -1,5 +1,5 @@
 var express = require('express');
-var app = require('express')();
+var app = express();
 var session = require('express-session');
 var passport = require('passport');
 var http = require('http').createServer(app);
@@ -9,12 +9,32 @@ var mongoose = require('mongoose')
 // Initial express port
 let PORT = process.env.PORT || 3001
 
+//middleware for passport
+require("./config/passport")(passport);
+
 // Parse application body as JSON
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+
+// Express Session
+app.use(
+  session({
+    secret: "yo",
+    resave: true,
+    saveUninitialized: true,
+    cookie: {domain: 'localhost:3000'}
+  })
+);
+
+// Initialize passport
+app.use(passport.initialize());
+app.use(passport.session());
+
+
 // Routes
 app.use('/users', require('./routes/users'));
+require('./routes/isAuth')(app);
 
 // Inital database connection
 var MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost/Dogstr';

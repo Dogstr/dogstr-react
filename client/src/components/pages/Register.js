@@ -1,5 +1,7 @@
 import React, { useState } from "react";
+import { Redirect } from 'react-router';
 import { Container } from "react-bootstrap";
+import Alert from "../subcomponents/Alert";
 import axios from "axios";
 
 const Register = () => {
@@ -7,6 +9,8 @@ const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [password2, setPassword2] = useState("");
+  const [errors, setErrors] = useState([]);
+  const [loggedIn, authLogin] = useState(false);
 
   const submitRegisterRequest = (e) => {
     e.preventDefault();
@@ -19,12 +23,22 @@ const Register = () => {
     axios
       .post("/users/register", user)
       .then((response) => {
-        console.log(response.data);
+        if (response.data.length > 0){
+          setErrors(response.data);
+        }else{
+          authLogin(true);
+        }
       })
       .catch((error) => {
         console.log(error);
       });
   };
+
+  const clearErrors = () => {
+    setErrors([])
+  }
+
+  if (!loggedIn){
 
   return (
     <Container>
@@ -34,6 +48,7 @@ const Register = () => {
             <h1 style={{ color: "#454545af" }} class="text-center mb-3">
               <i class="fas fa-user-plus"></i> Register
             </h1>
+            <Alert errors={errors} clearErrors={clearErrors}/>
             <form>
               <div class="form-group">
                 <label for="name">Name</label>
@@ -54,6 +69,7 @@ const Register = () => {
                   name="email"
                   class="form-control"
                   placeholder="Enter Email"
+                  onChange={(e) => setEmail(e.target.value)}
                 />
               </div>
               <div class="form-group">
@@ -64,6 +80,7 @@ const Register = () => {
                   name="password"
                   class="form-control"
                   placeholder="Create Password"
+                  onChange={(e) => setPassword(e.target.value)}
                 />
               </div>
               <div class="form-group">
@@ -74,6 +91,7 @@ const Register = () => {
                   name="password2"
                   class="form-control"
                   placeholder="Confirm Password"
+                  onChange={(e) => setPassword2(e.target.value)}
                 />
               </div>
               <button
@@ -96,6 +114,11 @@ const Register = () => {
       </div>
     </Container>
   );
+  }else{
+    return (
+      <Redirect to="/dashboard" />
+    )
+  }
 };
 
 export default Register;

@@ -1,11 +1,10 @@
-import React, { useState } from "react";
+import React, { useState} from "react";
 import { Redirect } from 'react-router';
 import { Container } from "react-bootstrap";
 import Alert from "../subcomponents/Alert";
 import axios from "axios";
 
-
-const Login = () => {
+const Login = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loggedIn, authLogin] = useState(false);
@@ -17,18 +16,20 @@ const Login = () => {
       email: email,
       password: password,
     };
-    axios
-      .post("/users/login", user)
-      .then((response) => {
-        if (response.data) {
-          authLogin(true);
-        }else{
-          setErrors([{msg: "Invalid email or password"}])
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    axios({
+      method: "POST",
+      data: user,
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+      },
+      url: "http://localhost:3000/users/login"
+    }).then(function(res){
+      if (res.data){
+        authLogin(true)
+      }else{
+        setErrors([{msg: "Invalid or missing credentials"}])
+      }
+    })
   };
 
   const clearErrors = () => {

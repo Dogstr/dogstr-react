@@ -6,7 +6,6 @@ import axios from 'axios';
 
 const Dashboard = () => {
 
-    useEffect(() => {
         axios({
             method: "GET",
             headers: {
@@ -15,12 +14,10 @@ const Dashboard = () => {
             withCredentials: true,
             url: "http://localhost:3000/checkAuthenticated"
           }).then(function(res){
-            console.log(res.data)
             if (!res.data){
                 window.location.href = "/login"
             }
           })
-    })
 
     const logOut = (e) => {
         e.preventDefault()
@@ -36,6 +33,15 @@ const Dashboard = () => {
           })
     }
 
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(position => {
+            let pos = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude
+            };
+            console.log(pos)
+        })
+    }
 
     return (
         <div>

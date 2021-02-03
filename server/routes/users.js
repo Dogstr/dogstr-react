@@ -4,7 +4,7 @@ const db = require("../models");
 const bcrypt = require("bcryptjs");
 var passport = require("passport");
 
-router.post("/register", (req, res) => {
+router.post("/register", (req, res, next) => {
   let { name, email, password, password2 } = req.body;
 
   let errors = [];
@@ -38,8 +38,20 @@ router.post("/register", (req, res) => {
             password = hash;
 
             db.Users.create({ name: name, email: email, password: password })
-              .then(function (result) {
-                res.json(result);
+              .then(function () {
+                passport.authenticate("local", (err, user, info) => {
+                  if (err) {
+                    return next(err);
+                  }
+                  if (!user) {
+                    res.json(false);
+                  } else {
+                    req.logIn(user, (err) => {
+                      if (err) throw err;
+                      res.send(user);
+                    });
+                  }
+                })(req, res, next);
               })
               .catch(function (error) {
                 console.log(error);
@@ -57,19 +69,19 @@ router.post("/login", (req, res, next) => {
       return next(err);
     }
     if (!user) {
-        res.json(false);
+      res.json(false);
     } else {
-        req.logIn(user, err => {
-            if (err) throw err;
-            res.send(user)
-        })
+      req.logIn(user, (err) => {
+        if (err) throw err;
+        res.send(user);
+      });
     }
   })(req, res, next);
 });
 
 router.get("/logout", (req, res) => {
-    req.logout()
-    res.json({msg: "logged out"})
-})
+  req.logout();
+  res.json({ msg: "logged out" });
+});
 
 module.exports = router;

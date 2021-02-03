@@ -42,54 +42,54 @@ const Register = () => {
 
   return (
     <Container>
-      <div class="row mt-5">
-        <div class="col-md-6 m-auto">
-          <div class="card card-body">
-            <h1 style={{ color: "#454545af" }} class="text-center mb-3">
-              <i class="fas fa-user-plus"></i> Register
+      <div className="row mt-5">
+        <div className="col-md-6 m-auto">
+          <div className="card card-body">
+            <h1 style={{ color: "#454545af" }} className="text-center mb-3">
+              <i className="fas fa-user-plus"></i> Register
             </h1>
             <Alert errors={errors} clearErrors={clearErrors}/>
             <form>
-              <div class="form-group">
+              <div className="form-group">
                 <label for="name">Name</label>
                 <input
                   type="name"
                   id="name"
                   name="name"
-                  class="form-control"
+                  className="form-control"
                   placeholder="Enter Name"
                   onChange={(e) => setName(e.target.value)}
                 />
               </div>
-              <div class="form-group">
+              <div className="form-group">
                 <label htmlFor="email">Email</label>
                 <input
                   type="email"
                   id="email"
                   name="email"
-                  class="form-control"
+                  className="form-control"
                   placeholder="Enter Email"
                   onChange={(e) => setEmail(e.target.value)}
                 />
               </div>
-              <div class="form-group">
+              <div className="form-group">
                 <label htmlFor="password">Password</label>
                 <input
                   type="password"
                   id="password"
                   name="password"
-                  class="form-control"
+                  className="form-control"
                   placeholder="Create Password"
                   onChange={(e) => setPassword(e.target.value)}
                 />
               </div>
-              <div class="form-group">
+              <div className="form-group">
                 <label htmlFor="password2">Confirm Password</label>
                 <input
                   type="password"
                   id="password2"
                   name="password2"
-                  class="form-control"
+                  className="form-control"
                   placeholder="Confirm Password"
                   onChange={(e) => setPassword2(e.target.value)}
                 />
@@ -98,12 +98,12 @@ const Register = () => {
                 onClick={(e) => submitRegisterRequest(e)}
                 style={{ backgroundColor: "#74c69d", border: "none" }}
                 type="submit"
-                class="btn btn-primary btn-block"
+                className="btn btn-primary btn-block"
               >
                 Register
               </button>
             </form>
-            <p class="lead mt-4">
+            <p className="lead mt-4">
               Have An Account?{" "}
               <a style={{ color: "#74c69d" }} href="/login">
                 Login

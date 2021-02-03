@@ -20,18 +20,24 @@ const Register = () => {
       password: password,
       password2: password2,
     };
-    axios
-      .post("/users/register", user)
-      .then((response) => {
-        if (response.data.length > 0){
-          setErrors(response.data);
-        }else{
-          authLogin(true);
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    axios({
+      method: "POST",
+      data: user,
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+      },
+      withCredentials: true,
+      url: "http://localhost:3000/users/register"
+    }).then((response) => {
+      if (response.data.length > 0){
+        setErrors(response.data);
+      }else{
+        authLogin(true);
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+    });
   };
 
   const clearErrors = () => {

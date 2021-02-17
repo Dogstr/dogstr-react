@@ -56,6 +56,7 @@ app.use((req, res, next) => {
 
 // Routes
 app.use('/users', require('./routes/users'));
+app.use('/parks', require('./routes/parks'));
 require('./routes/isAuth')(app);
 
 

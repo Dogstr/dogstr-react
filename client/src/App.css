@@ -1,3 +1,7 @@
+body {
+  background-image: url(./DOGSTR-BACKGROUND.png); 
+} 
+
 .home-container {
   border-radius: 6px;
   border-color: #858484;
@@ -21,6 +25,20 @@
   color: #454545af;
   text-align: center;
   font-size: 100px;
+}
+
+.dashboard-paw {
+  font-size: 30px;
+}
+
+.dropdown-menu {
+  right: -16px !important;
+  left: auto !important;
+  top: 50px !important;
+}
+
+.dropdown-item {
+  text-align: center !important;
 }
 
 .home-prompt {
@@ -48,6 +66,11 @@
   background-color: #fe6e6e;
 }
 
+#nav {
+  background-color: #d6e9d8 !important;
+}
+
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -70,15 +93,18 @@
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+#map {
+  display: flex;
+  justify-content: center;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.search-form {
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  margin: 0 auto;
+  width: 80vw;
+  height: 10vh;
+  background-color: #827878b6;
+  margin-top: 30px;
 }

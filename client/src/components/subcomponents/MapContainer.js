@@ -2,6 +2,7 @@ import React, { useState, useCallback, useRef } from "react";
 import { Button, Form, FormControl } from "react-bootstrap";
 import mapStyles from "../styles/mapStyles";
 import axios from "axios";
+import ThreadContainer from "./ThreadContainer";
 
 import {
   GoogleMap,
@@ -20,7 +21,7 @@ const options = {
 const MapContainer = () => {
   const [userLocation, setUserLocation] = useState();
   const [parks, setParks] = useState([]);
-  const [search, setSearch] = useState()
+  const [search, setSearch] = useState();
   const mapRef = useRef();
   const onMapload = useCallback((map) => {
     mapRef.current = map;
@@ -38,6 +39,7 @@ const MapContainer = () => {
           lat: position.coords.latitude,
           lng: position.coords.longitude,
         };
+        console.log(pos);
         setUserLocation(pos, getNearbyDogParks(pos));
       });
     }
@@ -76,31 +78,40 @@ const MapContainer = () => {
   };
 
   const handleSearchInput = (e) => {
-    setSearch(e.target.value)
-  }
+    setSearch(e.target.value);
+  };
 
   const handleSearchSubmit = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     let geocoder = new window.google.maps.Geocoder();
-    geocoder.geocode({address: search}, function(results, status){
+    geocoder.geocode({ address: search }, function (results, status) {
       if (status == window.google.maps.GeocoderStatus.OK) {
         let pos = {
           lat: results[0].geometry.location.lat(),
-          lng: results[0].geometry.location.lng()
-        }
+          lng: results[0].geometry.location.lng(),
+        };
         setUserLocation(pos, getNearbyDogParks(pos));
+      } else {
+        console.log("tits");
       }
-    })
-  }
+    });
+  };
 
-  if (loadError) return "error loading maps";
+  if (loadError) return console.log("error loading maps");
   if (!isLoaded) return "loading maps";
   return (
     <>
       <div className="search-form">
         <Form onSubmit={(e) => handleSearchSubmit(e)} inline>
-          <FormControl onChange={(e) => handleSearchInput(e)}type="text" placeholder="Search for dog parks" className="mr-sm" />
-          <Button onClick={(e) => handleSearchSubmit(e)} variant="success">Search</Button>
+          <FormControl
+            onChange={(e) => handleSearchInput(e)}
+            type="text"
+            placeholder="Search for dog parks"
+            className="mr-sm"
+          />
+          <Button onClick={(e) => handleSearchSubmit(e)} variant="success">
+            Search
+          </Button>
         </Form>
       </div>
       <div id="map">
@@ -146,6 +157,7 @@ const MapContainer = () => {
           ) : null}
         </GoogleMap>
       </div>
+      <ThreadContainer />
     </>
   );
 };

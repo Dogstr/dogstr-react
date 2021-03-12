@@ -1,10 +1,13 @@
-import React, { useState, useEffect } from "react";
-import { Redirect } from "react-router";
-import { Button } from "react-bootstrap";
+import React, { useState } from "react";
 import axios from "axios";
 import MapContainer from "../subcomponents/MapContainer";
+import DogstrNav from "../subcomponents/DogstrNav";
+import ThreadContainer from "../subcomponents/ThreadContainer";
+import ThreadContext from "../subcomponents/ThreadContext";
+
 
 const Dashboard = () => {
+  const [threads, setThreads] = useState(null)
   axios({
     method: "GET",
     headers: {
@@ -18,35 +21,13 @@ const Dashboard = () => {
     }
   });
 
-  const logOut = (e) => {
-    e.preventDefault();
-    axios({
-      method: "GET",
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-      },
-      withCredentials: true,
-      url: "http://localhost:3000/users/logout",
-    }).then(function (res) {
-      window.location.reload();
-    });
-  };
-
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition((position) => {
-      let pos = {
-        lat: position.coords.latitude,
-        lng: position.coords.longitude,
-      };
-      console.log(pos);
-    });
-  }
-
   return (
     <div>
-      <h1>Home</h1>
+      <ThreadContext.Provider value={[threads, setThreads]}>
+      <DogstrNav />
       <MapContainer />
-      <Button onClick={(e) => logOut(e)}>Logout</Button>
+      <ThreadContainer />
+      </ThreadContext.Provider>
     </div>
   );
 };

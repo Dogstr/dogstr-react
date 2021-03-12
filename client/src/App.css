@@ -1,3 +1,7 @@
+body {
+  background-color: #c0bfbf !important;
+} 
+
 .home-container {
   border-radius: 6px;
   border-color: #858484;
@@ -21,6 +25,20 @@
   color: #454545af;
   text-align: center;
   font-size: 100px;
+}
+
+.dashboard-paw {
+  font-size: 30px;
+}
+
+.dropdown-menu {
+  right: -16px !important;
+  left: auto !important;
+  top: 50px !important;
+}
+
+.dropdown-item {
+  text-align: center !important;
 }
 
 .home-prompt {
@@ -48,15 +66,8 @@
   background-color: #fe6e6e;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+#nav {
+  background-color: #d6e9d8 !important;
 }
 
 .App-header {
@@ -70,15 +81,101 @@
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+#map {
+  display: flex;
+  justify-content: center;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
+.search-form {
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  margin: 0 auto;
+  width: 80vw;
+  height: 10vh;
+  background-color: #827878b6;
+  margin-top: 30px;
+}
+
+.threads-container {
+  width: 80vw;
+  margin: 0 auto;
+  height: 90vh;
+  margin-top: 70px;
+  background-color: whitesmoke;
+  box-shadow: 1px 1px 10px 0px #20232A;
+}
+
+.threads-header {
+  width: 80vw;
+  height: 120px;
+  background-color: #d6e9d8;
+  border-style: inset;
+  border-color: black;
+  border-width: 1px;
+  padding: 20px;
+  position: absolute;
+}
+
+.threads-scrollable {
+  position: relative;
+  width: 100%;
+  max-height: calc(90vh - 120px);
+  overflow-y: scroll;
+  top: 120px;
+}
+
+.input-group {
+  width: 80vw !important;
+  margin: 0 auto !important;
+  box-shadow: 1px 1px 10px 0px #c6cee0 !important;
+  margin-bottom: 40px !important;
+}
+
+.btn {
+  border-radius: 0 !important;
+}
+
+.message-block {
+  width: 100%;
+  padding: 10px;
+  background-color: #45454513;
+  margin-bottom: 10px;
+  word-break: break-all;
+}
+
+.thread-block {
+  display: flex;
+  padding: 10px;
+}
+
+.thread-user {
+  font-size: 16px;
+  text-align: center;
+  padding: 10px;
+  background-color: #383b3fd7;
+  color: white;
+  font-family: 'Poppins';
+  font-weight: 200;
+  border-radius: 0px 4px 4px 4px;
+  word-wrap: break-word;
+}
+
+.message {
+  font-size: 18px;
+  font-family: 'Poppins';
+}
+
+.thread-close {
+  float: right !important;
+  padding: 6px !important;
+  background-color: #d6e9d8 !important;
+  border-style: none !important;
+  color: black !important;
+}
+
+@media screen and (max-width: 800px) {
+  .location-form {
+    max-width: 70% !important;
   }
 }

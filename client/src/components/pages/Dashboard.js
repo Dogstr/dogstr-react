@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from "react";
-import { Redirect } from "react-router";
-import { Button } from "react-bootstrap";
+import React, { useState } from "react";
 import axios from "axios";
 import MapContainer from "../subcomponents/MapContainer";
 import DogstrNav from "../subcomponents/DogstrNav";
+import ThreadContainer from "../subcomponents/ThreadContainer";
+import ThreadContext from "../subcomponents/ThreadContext";
+
 
 const Dashboard = () => {
+  const [threads, setThreads] = useState(null)
   axios({
     method: "GET",
     headers: {
@@ -21,8 +23,11 @@ const Dashboard = () => {
 
   return (
     <div>
+      <ThreadContext.Provider value={[threads, setThreads]}>
       <DogstrNav />
       <MapContainer />
+      <ThreadContainer />
+      </ThreadContext.Provider>
     </div>
   );
 };

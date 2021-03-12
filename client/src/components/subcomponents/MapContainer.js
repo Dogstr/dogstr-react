@@ -21,6 +21,7 @@ const options = {
 
 
 const MapContainer = () => {
+  console.log(process.env.API_KEY)
   const [threads, setThreads] = useContext(ThreadContext);
   const [userLocation, setUserLocation] = useState();
   const [parks, setParks] = useState([]);

@@ -53,7 +53,6 @@ app.use('/parks', require('./routes/parks'));
 app.use('/threads', require('./routes/threads'));
 require('./routes/isAuth')(app);
 
-<<<<<<< HEAD
 if (process.env.NODE_ENV === 'production') {
   // Serve any static files
   app.use(express.static("client/build"));
@@ -63,8 +62,6 @@ if (process.env.NODE_ENV === 'production') {
   }); 
 }
 
-=======
->>>>>>> dae9c64807132645e578921c6959d4c8f08af9e5
 
 // Initialize Server
 http.listen(PORT, function() {

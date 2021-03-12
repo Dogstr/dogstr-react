@@ -1,8 +1,5 @@
 {
-<<<<<<< HEAD
   "homepage": "https://dogstr-react.herokuapp.com/",
-=======
->>>>>>> dae9c64807132645e578921c6959d4c8f08af9e5
   "name": "client",
   "version": "0.1.0",
   "private": true,

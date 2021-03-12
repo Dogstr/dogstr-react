@@ -6,6 +6,7 @@ var http = require('http').createServer(app);
 var mongoose = require('mongoose')
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
+var path = require('path');
 
 
 // Inital database connection

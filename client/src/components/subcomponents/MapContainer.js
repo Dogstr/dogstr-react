@@ -77,7 +77,7 @@ const MapContainer = () => {
     axios({
       method: "POST",
       data: id,
-      url: "http://localhost:3000/threads/api/get_threads"
+      url: "https://dogstr-react.herokuapp.com/threads/api/get_threads"
     }).then((res) => {
       if (res.data[0].noThreads){
         setThreads([{park_id: res.data[0].park_id, name: res.data[0].name}])
@@ -102,7 +102,7 @@ const MapContainer = () => {
         'Content-Type': 'application/json'
       },
     };
-    fetch('http://localhost:3000/parks/api/createpark', requestOptions)
+    fetch('https://dogstr-react.herokuapp.com/parks/api/createpark', requestOptions)
         .then((response) => {
           
         })

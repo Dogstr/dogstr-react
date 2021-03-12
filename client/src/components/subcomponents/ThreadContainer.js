@@ -26,7 +26,7 @@ const ThreadContainer = () => {
         "Access-Control-Allow-Origin": "*",
       },
       withCredentials: true,
-      url: "http://localhost:3000/threads/api/submit_threads",
+      url: "https://dogstr-react.herokuapp.com/threads/api/submit_threads",
     }).then(function (res) {
       if (threads[0].name){
         threads.splice(0, 1)

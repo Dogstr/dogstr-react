@@ -14,7 +14,7 @@ const Dashboard = () => {
       "Access-Control-Allow-Origin": "*",
     },
     withCredentials: true,
-    url: "http://localhost:3000/checkAuthenticated",
+    url: "https://dogstr-react.herokuapp.com/checkAuthenticated",
   }).then(function (res) {
     if (!res.data) {
       window.location.href = "/login";

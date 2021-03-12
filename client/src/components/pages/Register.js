@@ -27,7 +27,7 @@ const Register = () => {
         "Access-Control-Allow-Origin": "*",
       },
       withCredentials: true,
-      url: "http://localhost:3000/users/register"
+      url: "https://dogstr-react.herokuapp.com/users/register"
     }).then((response) => {
       if (response.data.length > 0){
         setErrors(response.data);

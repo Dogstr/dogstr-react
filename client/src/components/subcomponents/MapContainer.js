@@ -33,7 +33,7 @@ const MapContainer = () => {
   const [selected, setSelected] = useState(null);
 
   const { isLoaded, loadError } = useLoadScript({
-    googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
+    googleMapsApiKey: process.env.API_KEY,
     libraries: libraries,
   });
 

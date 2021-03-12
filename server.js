@@ -7,6 +7,7 @@ var mongoose = require('mongoose')
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 var path = require('path');
+require('dotenv').config()
 
 
 // Inital database connection

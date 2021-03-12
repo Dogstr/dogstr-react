@@ -12,7 +12,7 @@ const DogstrNav = () => {
             "Access-Control-Allow-Origin": "*",
           },
           withCredentials: true,
-          url: "http://localhost:3000/users/logout",
+          url: "https://dogstr-react.herokuapp.com/users/logout",
         }).then(function (res) {
           window.location.reload();
         });

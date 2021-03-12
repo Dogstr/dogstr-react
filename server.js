@@ -3,7 +3,6 @@ var app = express();
 var session = require('express-session');
 var passport = require('passport');
 var http = require('http').createServer(app);
-var io = require('socket.io')(http);
 var mongoose = require('mongoose')
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
@@ -48,15 +47,10 @@ app.use(passport.session());
 //middleware for passport
 require("./config/passport")(passport);
 
-app.use((req, res, next) => {
-    console.log(req.session)
-    next();
-})
-
-
 // Routes
 app.use('/users', require('./routes/users'));
 app.use('/parks', require('./routes/parks'));
+app.use('/threads', require('./routes/threads'));
 require('./routes/isAuth')(app);
 
 

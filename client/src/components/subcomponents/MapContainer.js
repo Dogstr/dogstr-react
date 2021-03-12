@@ -1,8 +1,8 @@
-import React, { useState, useCallback, useRef } from "react";
+import React, { useState, useCallback, useRef, useContext } from "react";
 import { Button, Form, FormControl } from "react-bootstrap";
 import mapStyles from "../styles/mapStyles";
+import ThreadContext from "../subcomponents/ThreadContext";
 import axios from "axios";
-import ThreadContainer from "./ThreadContainer";
 
 import {
   GoogleMap,
@@ -18,7 +18,10 @@ const mapContainerStyle = {
 const options = {
   styles: mapStyles,
 };
+
+
 const MapContainer = () => {
+  const [threads, setThreads] = useContext(ThreadContext);
   const [userLocation, setUserLocation] = useState();
   const [parks, setParks] = useState([]);
   const [search, setSearch] = useState();
@@ -28,10 +31,12 @@ const MapContainer = () => {
     getUserLocation();
   }, []);
   const [selected, setSelected] = useState(null);
+
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
     libraries: libraries,
   });
+
   const getUserLocation = () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
@@ -44,6 +49,7 @@ const MapContainer = () => {
       });
     }
   };
+
   const getNearbyDogParks = (pos) => {
     let request = {
       location: pos,
@@ -54,6 +60,7 @@ const MapContainer = () => {
     let service = new window.google.maps.places.PlacesService(mapRef.current);
     service.nearbySearch(request, nearbyCallback);
   };
+
   const nearbyCallback = (results, status) => {
     if (status == window.google.maps.places.PlacesServiceStatus.OK) {
       setParks(results);
@@ -61,20 +68,47 @@ const MapContainer = () => {
     }
   };
 
+  const getThreads = (e, selected) => {
+    e.preventDefault()
+    let id = {
+      id: selected.place_id,
+      name: selected.name
+    }
+    axios({
+      method: "POST",
+      data: id,
+      url: "http://localhost:3000/threads/api/get_threads"
+    }).then((res) => {
+      if (res.data[0].noThreads){
+        setThreads([{park_id: res.data[0].park_id, name: res.data[0].name}])
+      }else{
+        setThreads(res.data)
+      }
+    }).catch(error => console.log(error));
+    
+  }
+
   const parkDBCall = (park) => {
-    console.log(mapRef);
     let newPark = {
       id: park.place_id,
       name: park.name,
       rating: park.rating,
     };
-    axios({
-      method: "POST",
-      data: newPark,
-      url: "http://localhost:3000/parks/api",
-    }).then((response) => {
-      console.log(response);
-    });
+    const requestOptions = {
+      method: 'POST',
+      body: JSON.stringify(newPark),
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+    };
+    fetch('http://localhost:3000/parks/api/createpark', requestOptions)
+        .then((response) => {
+          
+        })
+        .catch((error) => {
+          console.log(error) 
+        })
   };
 
   const handleSearchInput = (e) => {
@@ -91,8 +125,6 @@ const MapContainer = () => {
           lng: results[0].geometry.location.lng(),
         };
         setUserLocation(pos, getNearbyDogParks(pos));
-      } else {
-        console.log("tits");
       }
     });
   };
@@ -107,7 +139,7 @@ const MapContainer = () => {
             onChange={(e) => handleSearchInput(e)}
             type="text"
             placeholder="Search for dog parks"
-            className="mr-sm"
+            className="mr-sm location-form"
           />
           <Button onClick={(e) => handleSearchSubmit(e)} variant="success">
             Search
@@ -136,7 +168,8 @@ const MapContainer = () => {
                   anchor: new window.google.maps.Point(15, 0),
                 }}
                 onClick={() => {
-                  setSelected(park, parkDBCall(park));
+                  setSelected(park);
+                  parkDBCall(park)
                 }}
               ></Marker>
             ))}
@@ -151,13 +184,12 @@ const MapContainer = () => {
               <div className="text-center">
                 <h2>{selected.name}</h2>
                 <h3>{selected.rating} Stars</h3>
-                <Button>Park Chat</Button>
+                <Button onClick={(e) => getThreads(e, selected)}>Park Chat</Button>
               </div>
             </InfoWindow>
           ) : null}
         </GoogleMap>
       </div>
-      <ThreadContainer />
     </>
   );
 };

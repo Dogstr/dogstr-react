@@ -21,7 +21,7 @@ const options = {
 
 
 const MapContainer = () => {
-  console.log(process.env.API_KEY)
+  console.log(process.env.REACT_APP_API_KEY)
   const [threads, setThreads] = useContext(ThreadContext);
   const [userLocation, setUserLocation] = useState();
   const [parks, setParks] = useState([]);
@@ -34,7 +34,7 @@ const MapContainer = () => {
   const [selected, setSelected] = useState(null);
 
   const { isLoaded, loadError } = useLoadScript({
-    googleMapsApiKey: process.env.API_KEY,
+    googleMapsApiKey: process.env.REACT_APP_API_KEY,
     libraries: libraries,
   });
 

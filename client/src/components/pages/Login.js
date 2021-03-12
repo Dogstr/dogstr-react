@@ -22,7 +22,7 @@ const Login = (props) => {
       headers: {
         "Access-Control-Allow-Origin": "*",
       },
-      url: "http://localhost:3000/users/login"
+      url: "https://dogstr-react.herokuapp.com/users/login"
     }).then(function(res){
       if (res.data){
         authLogin(true)

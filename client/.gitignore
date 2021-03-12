@@ -8,6 +8,11 @@
 # testing
 /coverage
 
+<<<<<<< HEAD
+=======
+# production
+/build
+>>>>>>> dae9c64807132645e578921c6959d4c8f08af9e5
 
 .env
 

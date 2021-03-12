@@ -29,12 +29,6 @@ const DogstrNav = () => {
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="ml-auto">
           <NavDropdown title={<i class="fas fa-user-alt"></i>} id="basic-nav-dropdown">
-            <NavDropdown.Item href="#action/3.1">Profile</NavDropdown.Item>
-            <NavDropdown.Item href="#action/3.2">
-              Saved Parks
-            </NavDropdown.Item>
-            <NavDropdown.Item href="#action/3.3">Messaging</NavDropdown.Item>
-            <NavDropdown.Divider />
             <NavDropdown.Item href="#action/3.4">
               <Button onClick={(e) => logOut(e)}variant="danger">Logout</Button>
             </NavDropdown.Item>
